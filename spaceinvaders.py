@@ -1,8 +1,3 @@
-#!/usr/bin/env python
-
-# Space Invaders
-# Created by Lee Robinson
-
 from pygame import *
 import sys
 from os.path import abspath, dirname
@@ -328,8 +323,7 @@ class Text(object):
 
 class SpaceInvaders(object):
     def __init__(self):
-        # It seems, in Linux buffersize=512 is not enough, use 4096 to prevent:
-        #   ALSA lib pcm.c:7963:(snd_pcm_recover) underrun occurred
+
         mixer.pre_init(44100, -16, 1, 4096)
         init()
         self.clock = time.Clock()
@@ -383,7 +377,7 @@ class SpaceInvaders(object):
         blockerGroup = sprite.Group()
         for row in range(4):
             for column in range(9):
-                blocker = Blocker(10, GREEN, row, column)
+                blocker = Blocker(10, RED, row, column)
                 blocker.rect.x = 50 + (200 * number) + (column * blocker.width)
                 blocker.rect.y = BLOCKERS_POSITION + (row * blocker.height)
                 blockerGroup.add(blocker)
@@ -428,14 +422,16 @@ class SpaceInvaders(object):
             if e.type == KEYDOWN:
                 if e.key == K_SPACE:
                     if len(self.bullets) == 0 and self.shipAlive:
-                        if self.score < 1000:
+                        if self.score < 100:
+
                             bullet = Bullet(self.player.rect.x + 23,
                                             self.player.rect.y + 5, -1,
                                             15, 'laser', 'center')
                             self.bullets.add(bullet)
                             self.allSprites.add(self.bullets)
                             self.sounds['shoot'].play()
-                        else:
+
+                        elif self.score < 200:
                             leftbullet = Bullet(self.player.rect.x + 8,
                                                 self.player.rect.y + 5, -1,
                                                 15, 'laser', 'left')
@@ -444,6 +440,22 @@ class SpaceInvaders(object):
                                                  15, 'laser', 'right')
                             self.bullets.add(leftbullet)
                             self.bullets.add(rightbullet)
+                            self.allSprites.add(self.bullets)
+                            self.sounds['shoot2'].play()
+
+                        else:
+                            leftbullet = Bullet(self.player.rect.x + 8,
+                                                self.player.rect.y + 5, -1,
+                                                15, 'laser', 'left')
+                            middlebullet = Bullet(self.player.rect.x + 23,
+                                                  self.player.rect.y + 10, -1,
+                                                  15, 'laser', 'left')
+                            rightbullet = Bullet(self.player.rect.x + 38,
+                                                 self.player.rect.y + 5, -1,
+                                                 15, 'laser', 'right')
+                            self.bullets.add(leftbullet)
+                            self.bullets.add(rightbullet)
+                            self.bullets.add(middlebullet)
                             self.allSprites.add(self.bullets)
                             self.sounds['shoot2'].play()
 
@@ -642,3 +654,4 @@ class SpaceInvaders(object):
 if __name__ == '__main__':
     game = SpaceInvaders()
     game.main()
+# ьыдвьажы
