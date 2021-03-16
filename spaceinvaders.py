@@ -654,4 +654,3 @@ class SpaceInvaders(object):
 if __name__ == '__main__':
     game = SpaceInvaders()
     game.main()
-# ьыдвьажы
